@@ -1,0 +1,43 @@
+<!-- app.component.html -->
+<div class="container">
+  <h2>Lista de Alunos</h2>
+
+  <form #alunoForm="ngForm" (ngSubmit)="alunoSelecionado.matricula ? atualizarAluno() : adicionarAluno()">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" [(ngModel)]="alunoSelecionado.nome" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail:</label>
+      <input type="text" id="email" name="email" [(ngModel)]="alunoSelecionado.email" required>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" class="btn">{{ alunoSelecionado.matricula ? 'Atualizar' : 'Adicionar' }}</button>
+      <button type="button" class="btn" (click)="limparFormulario()">Cancelar</button>
+    </div>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Matricula</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let aluno of alunos">
+        <td>{{ aluno.matricula }}</td>
+        <td>{{ aluno.nome }}</td>
+        <td>{{ aluno.email }}</td>
+        <td>
+          <button class="btn btn-edit" (click)="selecionarAluno(aluno)">Editar</button>
+          <button class="btn btn-delete" (click)="removerAluno(aluno.matricula)">Remover</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
